@@ -1,10 +1,10 @@
 {
   "name": "smpt-gmail",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "node api/index.js"
   },
   "dependencies": {
     "body-parser": "^1.20.1",
