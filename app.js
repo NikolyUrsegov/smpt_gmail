@@ -4,7 +4,6 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 
-
 const app = express();
 const whitelist = ['http://localhost:3000']; //white list consumers
 const corsOptions = {
@@ -21,12 +20,11 @@ const corsOptions = {
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
 };
 app.use(cors(corsOptions))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 let smpt_login = process.env.SMPT_LOGIN || '---'
 let smpt_password = process.env.SMPT_PASSWORD || '---'
-
 
 
 let transporter = nodemailer.createTransport({
@@ -37,24 +35,24 @@ let transporter = nodemailer.createTransport({
     },
 });
 
-app.get("/", function(request, response){
+app.get("/", function (request, response) {
     response.send('ok')
 });
 
-app.post("/sendMessage", async function(request, response){
+app.post("/sendMessage", async function (request, response) {
 
     const {name, phone, email, comments, INN} = request.body
 
-    let info = await transporter.sendMail({
+    await transporter.sendMail({
         from: name,
         to: "ursegovnikolaj@gmail.com",
-        subject: "test1",
+        subject: "ТТК",
         html: `<h2>Сообщение с TTK</h2>
-<div><b>Имя: </b> </div>
+<div><b>Имя: </b> <span>${name}</span></div>
 <div><b>Телефон: </b> <span>${phone}</span> </div>
 <div><b>Email: </b> <span>${email}</span></div>
-<div><b>ИНН: </b> <span>${INN}</span></div>
-<div><b>Коментарий: </b> <span>${comments}</span></div>
+<div><b>ИНН: </b> <span>${INN || 'Клиент не оставил ИНН'}</span></div>
+<div><b>Коментарий: </b> <span>${comments || 'Клиент не оставил комментария'}</span></div>
 `,
     });
     response.send('ok')
