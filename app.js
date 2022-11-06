@@ -29,7 +29,7 @@ app.get("/", function(request, response){
 
 app.post("/sendMessage", async function(request, response){
 
-    const {name, phone, email, comments, INN} = request.body
+    // const {name, phone, email, comments, INN} = request.body
 
     // let info = await transporter.sendMail({
 //         from: name,
