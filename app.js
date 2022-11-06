@@ -43,21 +43,21 @@ app.get("/", function(request, response){
 
 app.post("/sendMessage", async function(request, response){
 
-    // const {name, phone, email, comments, INN} = request.body
+    const {name, phone, email, comments, INN} = request.body
 
-    // let info = await transporter.sendMail({
-//         from: name,
-//         to: "ursegovnikolaj@gmail.com",
-//         subject: "test1",
-//         html: `<h2>Сообщение с TTK</h2>
-// <div><b>Имя: </b> </div>
-// <div><b>Телефон: </b> <span>${phone}</span> </div>
-// <div><b>Email: </b> <span>${email}</span></div>
-// <div><b>ИНН: </b> <span>${INN}</span></div>
-// <div><b>Коментарий: </b> <span>${comments}</span></div>
-// `,
-//     });
-    response.send('ddd')
+    let info = await transporter.sendMail({
+        from: name,
+        to: "ursegovnikolaj@gmail.com",
+        subject: "test1",
+        html: `<h2>Сообщение с TTK</h2>
+<div><b>Имя: </b> </div>
+<div><b>Телефон: </b> <span>${phone}</span> </div>
+<div><b>Email: </b> <span>${email}</span></div>
+<div><b>ИНН: </b> <span>${INN}</span></div>
+<div><b>Коментарий: </b> <span>${comments}</span></div>
+`,
+    });
+    response.send('ok')
 });
 
 let PORT = process.env.PORT || 3010
