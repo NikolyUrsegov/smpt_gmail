@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 
 
 const app = express();
-const whitelist = ['http://localhost:3000']; //white list consumers
+const whitelist = ['http://localhost:3000', 'https://ttktest.vercel.app/']; //white list consumers
 const corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
