@@ -6,7 +6,21 @@ const bodyParser = require('body-parser')
 
 
 const app = express();
-app.use(cors())
+const whitelist = ['http://localhost:3000']; //white list consumers
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(null, false);
+        }
+    },
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+    optionsSuccessStatus: 200,
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
+};
+app.use(cors(corsOptions))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -43,7 +57,7 @@ app.post("/sendMessage", async function(request, response){
 // <div><b>Коментарий: </b> <span>${comments}</span></div>
 // `,
 //     });
-    response.send(request)
+    response.send('ddd')
 });
 
 let PORT = process.env.PORT || 3010
