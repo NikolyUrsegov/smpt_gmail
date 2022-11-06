@@ -6,8 +6,7 @@ const bodyParser = require('body-parser')
 
 
 const app = express();
-
-app.use(cors());
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -32,7 +31,7 @@ app.post("/sendMessage", async function(request, response){
 
     const {name, phone, email, comments, INN} = request.body
 
-//     let info = await transporter.sendMail({
+    // let info = await transporter.sendMail({
 //         from: name,
 //         to: "ursegovnikolaj@gmail.com",
 //         subject: "test1",
